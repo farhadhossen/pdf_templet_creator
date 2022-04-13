@@ -1,8 +1,11 @@
 import 'package:get/get.dart';
 import 'package:pdf_templet_creator/app/modules/home/providers/pdf_api.dart';
 
+import '../models/attendance_monthly_model.dart';
 import '../models/invoice.dart';
+import '../providers/home_provider.dart';
 import '../providers/pdf_invoice_api.dart';
+import '../providers/pdf_monthly_data_api.dart';
 
 class HomeController extends GetxController {
   //TODO: Implement HomeController
@@ -72,6 +75,31 @@ class HomeController extends GetxController {
     // final invoice = Invoice(
     //
     // );
+
+  }
+
+
+  var attendanceModel = MonthlyAttendance().obs;
+  var attendanceList = List<MonthlyAttendance>.empty(growable: true).obs;
+
+  Future<void> getMonthlyAttendance() async {
+    try{
+
+      var attendance = await HomeProvider().fetchMonthlyAttendance();
+      if (attendance != null) {
+        print("hellooww:: "+attendance.toString());
+        attendanceModel.value = attendance;
+        attendanceList.add(attendance);
+        // print("===>"+attendanceList.toString());
+      }
+    }
+    finally{
+
+      final pdfFile = await PdfMonthlyDataApi.generate(attendanceModel.value);
+
+      PdfApi.openFile(pdfFile);
+
+    }
 
   }
 }

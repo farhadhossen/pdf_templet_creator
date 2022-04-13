@@ -175,6 +175,7 @@ class PdfInvoiceApi{
       buildSimpleText(title: "Address", value: invoice.supplier.address),
       pw.SizedBox(height: 1*PdfPageFormat.mm),
       buildSimpleText(title: "Paypal", value: invoice.supplier.address),
+      pw.Container()
     ]
   );
 
