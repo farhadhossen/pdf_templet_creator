@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pdf_templet_creator/app/modules/home/providers/pdf_api.dart';
 
@@ -101,5 +102,33 @@ class HomeController extends GetxController {
 
     }
 
+  }
+
+  chooseDate() async{
+
+
+
+
+    DateTime? pickedDate = await showDatePicker(
+        context: Get.context!,
+        initialDate: DateTime.now(),
+        firstDate: DateTime(2010),
+        lastDate: DateTime(2025),
+        builder: (context,widget) => Theme(
+          data: ThemeData().copyWith(
+              colorScheme: ColorScheme.dark(
+                  surface: Colors.purple
+              ),
+              dialogBackgroundColor: Colors.deepPurpleAccent
+          ),
+          child: widget!,
+        )
+    );
+
+    if(pickedDate!=null && pickedDate != DateTime.now()){
+      // print("selectedDate 2 "+selectedDate.value.toString());
+      final selectedDate = pickedDate;
+      // print("selectedDate 3 "+selectedDate.value.toString());
+    }
   }
 }
