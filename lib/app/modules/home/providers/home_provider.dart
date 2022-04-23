@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:get/get.dart';
 import 'package:open_file/open_file.dart';
 
+import '../models/attendace_month_group.dart';
 import '../models/attendance_monthly_model.dart';
 
 class HomeProvider extends GetConnect {
@@ -14,7 +15,7 @@ class HomeProvider extends GetConnect {
 
   final String BASE_URL = 'http://172.16.154.13/rdtl-hrm/api/';
 
-  Future<MonthlyAttendance?> fetchMonthlyAttendance() async {
+  Future<MonthlyAttendanceGrouped?> fetchMonthlyAttendance() async {
 
     // final prefs = await SharedPreferences.getInstance();
     // final String? logInToken = prefs.getString('token');
@@ -29,7 +30,7 @@ class HomeProvider extends GetConnect {
 
     var userDataforMonthAttendance = new Map();
     userDataforMonthAttendance['employee_id'] = employeeId;
-    userDataforMonthAttendance['date'] = date.toString();
+    userDataforMonthAttendance['date'] = "2022-01-01";
 
     // final prefs = await SharedPreferences.getInstance();
     // final String? logInToken = prefs.getString('token');
@@ -38,7 +39,7 @@ class HomeProvider extends GetConnect {
     // print("====>>>>login"+logInToken!+"===>login"+employeeId!.toString());
 
     var response = await post(
-        BASE_URL+'get-specific-user-attendance-data',
+        BASE_URL+'get-all-user-specific-month-attendance-data',
         userDataforMonthAttendance,
         headers: {'Authorization': 'Bearer $logInToken'});
     // print(response.statusCode.toString());
@@ -46,7 +47,7 @@ class HomeProvider extends GetConnect {
     if (response.statusCode == 200) {
       var jsonString = response.body;
       //print(jsonString);
-      return MonthlyAttendance.fromJson(jsonString);
+      return MonthlyAttendanceGrouped.fromJson(jsonString);
     } else {
       return null;
     }

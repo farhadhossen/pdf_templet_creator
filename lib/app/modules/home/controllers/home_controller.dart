@@ -2,11 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pdf_templet_creator/app/modules/home/providers/pdf_api.dart';
 
+import '../models/attendace_month_group.dart';
 import '../models/attendance_monthly_model.dart';
 import '../models/invoice.dart';
 import '../providers/home_provider.dart';
 import '../providers/pdf_invoice_api.dart';
 import '../providers/pdf_monthly_data_api.dart';
+import 'package:intl/intl.dart';
+
 
 class HomeController extends GetxController {
   //TODO: Implement HomeController
@@ -80,25 +83,33 @@ class HomeController extends GetxController {
   }
 
 
-  var attendanceModel = MonthlyAttendance().obs;
-  var attendanceList = List<MonthlyAttendance>.empty(growable: true).obs;
+  var monthlyAttendanceGrouped = MonthlyAttendanceGrouped().obs;
+  var attendanceList = List<MonthlyAttendanceGrouped>.empty(growable: true).obs;
 
   Future<void> getMonthlyAttendance() async {
     try{
 
       var attendance = await HomeProvider().fetchMonthlyAttendance();
+      // print("ki ailo? "+attendance!.data.toString());
       if (attendance != null) {
-        print("hellooww:: "+attendance.toString());
-        attendanceModel.value = attendance;
+        // print("hellooww:: "+attendance.toString());
+        monthlyAttendanceGrouped.value = attendance;
         attendanceList.add(attendance);
         // print("===>"+attendanceList.toString());
       }
     }
     finally{
 
-      final pdfFile = await PdfMonthlyDataApi.generate(attendanceModel.value);
+      //print(""+monthlyAttendanceGrouped.value.toString());
+
+      final pdfFile = await PdfMonthlyDataApi.generate(monthlyAttendanceGrouped.value);
+
 
       PdfApi.openFile(pdfFile);
+
+      // print( DateFormat('EEEE').format(DateTime.parse("2022-01-01 18:19:07")));
+      // print( DateFormat('dd-MM-yyyy').format(DateTime.parse("2022-01-01 18:19:07")));
+      // print( DateFormat('H:m').format(DateTime.parse("2022-01-01 18:19:07")));
 
     }
 
