@@ -4,18 +4,21 @@ import 'dart:io';
 
 import 'package:pdf_templet_creator/app/modules/home/providers/pdf_api.dart';
 
-import '../models/attendance_monthly_model.dart';
+
 
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart';
 
+import '../models/monthly_attendance_3.dart';
+
 class PdfMonthlyDataApi{
-  static Future<File> generate (MonthlyAttendance monthlyAttendance) async {
+  static Future<File> generate (MonthlyGroup3 monthlyAttendance) async {
 
     final pdf = Document();
 
 
     pdf.addPage(MultiPage(
+      maxPages: 10000000,
       pageFormat: PdfPageFormat.a4,
       build: (context) => [
         Container(
@@ -58,131 +61,17 @@ class PdfMonthlyDataApi{
               return Padding(
                   padding: const EdgeInsets.all(2.0),
                   child: Container(
-                    color: monthlyAttendance
-                        .data![index]
-                        .isPresent
-                        .toString() ==
-                        "1"?PdfColors.white:PdfColors.red,
-                    child: Row(
-                      children: [
-                        Expanded(
-                          flex: 1,
-                          child: Container(
-                              child: Text(""+
-                              monthlyAttendance
-                                  .data![index]
-                                  .date
-                                  .toString()
-                                  .substring(2, 10),
-                            style: TextStyle(
-                                color: PdfColors.black,
-                                fontWeight:
-                                FontWeight
-                                    .bold),)),
-
-                        ),
-                        Expanded(
-                          flex: 1,
-                          child: Container(
-
-                              child: Text(""+
-                                  monthlyAttendance
-                                      .data![index]
-                                      .day
-                                      .toString(),
-                                style: TextStyle(
-                                    color: PdfColors.black,
-                                    fontWeight:
-                                    FontWeight
-                                        .bold),)),
-
-                        ),
-                        Expanded(
-                          flex: 1,
-                          child: Container(
-
-                              child: monthlyAttendance
-                                  .data![index]
-                                  .inTime
-                                  .toString() ==
-                                  'N/A'?
-                              Text('N/A',style: TextStyle(
-                                  color: PdfColors.black,
-                                  fontWeight:
-                                  FontWeight
-                                      .bold),):
-                              Text(""+
-                                  monthlyAttendance
-                                      .data![index]
-                                      .inTime
-                                      .toString()
-                                      .substring(
-                                      0, 5),
-                                style: TextStyle(
-                                    color: PdfColors.black,
-                                    fontWeight:
-                                    FontWeight
-                                        .bold),)
-                          ),
-
-                        ),
-                        Expanded(
-                          flex: 1,
-                          child: Container(
-
-                              child: monthlyAttendance
-                                  .data![index]
-                                  .outTime
-                                  .toString() ==
-                                  'N/A'?
-                              Text('N/A',style: TextStyle(
-                                  color: PdfColors.black,
-                                  fontWeight:
-                                  FontWeight
-                                      .bold),):
-                              Text(""+
-                                  monthlyAttendance
-                                      .data![index]
-                                      .outTime
-                                      .toString()
-                                      .substring(
-                                      0, 5),
-                                style: TextStyle(
-                                    color: PdfColors.black,
-                                    fontWeight:
-                                    FontWeight
-                                        .bold),)
-                          ),
-
-
-
-                        ),
-                        Expanded(
-                          flex: 1,
-                          child: Container(
-
-                              child:
-                              monthlyAttendance
-                                  .data![index]
-                                  .isPresent
-                                  .toString() ==
-                                  "1"?
-                              Text("Present",
-                                style: TextStyle(
-                                    color: PdfColors.black,
-                                    fontWeight:
-                                    FontWeight
-                                        .bold),):
-                              Text("Absent",
-                                style: TextStyle(
-                                    color: PdfColors.black,
-                                    fontWeight:
-                                    FontWeight
-                                        .bold),)),
-
-                        ),
-                      ],
-                    ),
+                    // color: monthlyAttendance
+                    //     .data![index]
+                    //     .isPresent
+                    //     .toString() ==
+                    //     "1"?PdfColors.white:PdfColors.red,
+                    child:
+                      Text(""+monthlyAttendance.data![0]![0]![0].[0]!.toString()),
+                    // ListView.builder(
+                    //   itemCount: monthlyAttendance.data!.iterator..,
+                    //     itemBuilder: itemBuilder,
+                    //     )
                   ),
 
               );

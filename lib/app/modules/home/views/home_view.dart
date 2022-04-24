@@ -13,14 +13,19 @@ class HomeView extends GetView<HomeController> {
         centerTitle: true,
       ),
       body: Center(
-        child: ElevatedButton(
-            onPressed: () {
-              // controller.getMonthlyAttendance();
-              controller.chooseDate();
+        child: Column(
+          children: [
+            ElevatedButton(
+              onPressed: () {
+                controller.getMonthlyAttendance();
+                // controller.chooseDate();
               }, child: Text("Click Me"),
 
 
 
+            ),
+            //Text(""+controller.attendanceModel.value.data!.length.toString()),
+          ],
         ),
       ),
     );

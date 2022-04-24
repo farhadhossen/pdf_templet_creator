@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pdf_templet_creator/app/modules/home/providers/pdf_api.dart';
 
-import '../models/attendance_monthly_model.dart';
+
 import '../models/invoice.dart';
+import '../models/monthly_attendance_3.dart';
 import '../providers/home_provider.dart';
 import '../providers/pdf_invoice_api.dart';
 import '../providers/pdf_monthly_data_api.dart';
@@ -80,8 +81,8 @@ class HomeController extends GetxController {
   }
 
 
-  var attendanceModel = MonthlyAttendance().obs;
-  var attendanceList = List<MonthlyAttendance>.empty(growable: true).obs;
+  var attendanceModel = MonthlyGroup3().obs;
+  var attendanceList = List<MonthlyGroup3>.empty(growable: true).obs;
 
   Future<void> getMonthlyAttendance() async {
     try{
