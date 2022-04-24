@@ -53,11 +53,13 @@ class PdfMonthlyDataApi{
             ],
           ),
         ),
+        // Text(""+monthlyAttendance.data![0]![1]![1].employeeId.toString()), ///working line
+
         ListView.builder(
           // shrinkWrap: true,
 
             itemCount: monthlyAttendance.data!.length,
-            itemBuilder: (context, index) {
+            itemBuilder: (context, index1) {
               return Padding(
                   padding: const EdgeInsets.all(2.0),
                   child: Container(
@@ -67,11 +69,22 @@ class PdfMonthlyDataApi{
                     //     .toString() ==
                     //     "1"?PdfColors.white:PdfColors.red,
                     child:
-                      Text(""+monthlyAttendance.data![0]![0]![0].[0]!.toString()),
-                    // ListView.builder(
-                    //   itemCount: monthlyAttendance.data!.iterator..,
-                    //     itemBuilder: itemBuilder,
-                    //     )
+                    ListView.builder(
+                      itemCount: monthlyAttendance.data![index1]!.length,
+                        itemBuilder: (context, index2){
+                        return Container(
+                          child: ListView.builder(
+                            itemCount: monthlyAttendance.data![index1]![index2]!.length,
+                              itemBuilder: (context, index3){
+
+                              return Container(
+                                child: Text(""+
+                                    monthlyAttendance.data![index1]![index2]![index3].employeeId.toString())
+                              );
+                        }, )
+                        );
+                        },
+                        )
                   ),
 
               );

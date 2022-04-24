@@ -15,6 +15,9 @@ class HomeController extends GetxController {
   final count = 0.obs;
   @override
   void onInit() {
+
+    getMonthlyAttendance();
+
     super.onInit();
   }
 
@@ -97,9 +100,9 @@ class HomeController extends GetxController {
     }
     finally{
 
-      final pdfFile = await PdfMonthlyDataApi.generate(attendanceModel.value);
+      // final pdfFile = await PdfMonthlyDataApi.generate(attendanceModel.value);
 
-      PdfApi.openFile(pdfFile);
+      // PdfApi.openFile(pdfFile);
 
     }
 
