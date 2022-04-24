@@ -93,21 +93,19 @@ class PdfMonthlyDataApi{
                                       child: monthlyAttendance
                                           .data![index]
                                           .inTime
-                                          .toString() ==
-                                          'N/A'?
+                                           ==
+                                          null?
                                       Text('N/A',
                                       ):
                                       Text(""+
-                                          DateFormat('H:m').format(DateTime.parse(""+monthlyAttendance
+                                          DateFormat('HH:mm').format(DateTime.parse(""+
+                                              monthlyAttendance
                                               .data![index]
                                               .inTime
-                                              .toString() )
+                                              .toString(),
+                                          ),
 
-
-
-                                        ,
-
-                                        )
+                                        ),
                                   ),
 
                                 ),
@@ -119,17 +117,15 @@ class PdfMonthlyDataApi{
                                       child: monthlyAttendance
                                           .data![index]
                                           .outTime
-                                          .toString() ==
-                                          'N/A'?
+                                           ==
+                                          null?
                                       Text('N/A',):
                                       Text(""+
-                                          DateFormat('H:m').format(DateTime.parse(""+ monthlyAttendance
+                                          DateFormat('HH:mm').format(DateTime.parse(""+
+                                              monthlyAttendance
                                               .data![index]
                                               .outTime
-                                              .toString())
-
-
-                                        ,
+                                              .toString()),
                                         )
                                   ),
 
