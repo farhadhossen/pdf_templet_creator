@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:pdf_templet_creator/app/modules/home/providers/pdf_api.dart';
 
 
+import '../models/emdata.dart';
 import '../models/invoice.dart';
 import '../models/monthly_attendance_3.dart';
 import '../providers/home_provider.dart';
@@ -17,6 +18,10 @@ class HomeController extends GetxController {
   void onInit() {
 
     getMonthlyAttendance();
+
+
+
+
 
     super.onInit();
   }
@@ -87,24 +92,36 @@ class HomeController extends GetxController {
   var attendanceModel = MonthlyGroup3().obs;
   var attendanceList = List<MonthlyGroup3>.empty(growable: true).obs;
 
+  // var listData = List<List<EveryoneMonthlyData>>.empty(growable: true).obs;
+  var listData = MonthlyGroup3().obs;
   Future<void> getMonthlyAttendance() async {
-    try{
 
-      var attendance = await HomeProvider().fetchMonthlyAttendance();
-      if (attendance != null) {
-        print("hellooww:: "+attendance.toString());
-        attendanceModel.value = attendance;
-        attendanceList.add(attendance);
-        // print("===>"+attendanceList.toString());
-      }
-    }
-    finally{
+    listData.value = await HomeProvider().getData();
 
-      // final pdfFile = await PdfMonthlyDataApi.generate(attendanceModel.value);
+    // List<List<EveryoneMonthlyData>> list = await HomeProvider().getData();
+    // listData.addAll(list);
 
-      // PdfApi.openFile(pdfFile);
-
-    }
+    // try{
+    //
+    //   var attendance = await HomeProvider().fetchMonthlyAttendance();
+    //   if (attendance != null) {
+    //     print("hellooww:: "+attendance.toString());
+    //     attendanceModel.value = attendance;
+    //     attendanceList.add(attendanceModel.value);
+    //     print("===>"+attendanceList.toString());
+    //   }else{
+    //     print("getting null");
+    //   }
+    // }
+    // finally{
+    //
+    //   print("attendanceList: "+attendanceList.toString());
+    //
+    //   final pdfFile = await PdfMonthlyDataApi.generate(attendanceList);
+    //
+    //   PdfApi.openFile(pdfFile);
+    //
+    // }
 
   }
 

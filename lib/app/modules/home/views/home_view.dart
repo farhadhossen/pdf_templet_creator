@@ -25,13 +25,15 @@ class HomeView extends GetView<HomeController> {
               }, child: Text("Click Me"),
 
             ),
+
+            Obx(()=>Text(""+controller.listData.value.data![0]![2]![0].employeeId.toString()))
             //Text(""+controller.attendanceModel.value.data!.length.toString()),
 
-            Expanded(
-              child: SingleChildScrollView(
-                child: Expanded(child: LeftSideDesktopView()),
-              ),
-            )
+            // Expanded(
+            //   child: SingleChildScrollView(
+            //     child: Expanded(child: LeftSideDesktopView()),
+            //   ),
+            // )
           ],
         ),
       ),

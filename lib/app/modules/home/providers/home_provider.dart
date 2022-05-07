@@ -1,10 +1,14 @@
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:get/get.dart';
 import 'package:open_file/open_file.dart';
+import 'package:pdf_templet_creator/app/modules/home/models/emdata.dart';
 
 
 import '../models/monthly_attendance_3.dart';
+
+import 'package:http/http.dart' as http;
 
 class HomeProvider extends GetConnect {
   @override
@@ -24,7 +28,7 @@ class HomeProvider extends GetConnect {
     final String? logInToken = "95|Dnl96dmTGkeAI98vnIuZmxl6fH54YJFOmZwboBxB";
     final int? employeeId = 310;
 
-    // print("====>>>>login "+logInToken!+"===>login"+employeeId!.toString());
+    print("====>>>>login "+logInToken!+"===>login"+employeeId!.toString());
 
     DateTime date = DateTime.now();
 
@@ -42,7 +46,9 @@ class HomeProvider extends GetConnect {
         BASE_URL+'get-all-user-specific-month-attendance-data-grouped',
         userDataforMonthAttendance,
         headers: {'Authorization': 'Bearer $logInToken'});
-    // print(response.statusCode.toString());
+    print("my response code"+response.statusCode.toString());
+
+
 
     if (response.statusCode == 200) {
       var jsonString = response.body;
@@ -50,6 +56,31 @@ class HomeProvider extends GetConnect {
       return MonthlyGroup3.fromJson(jsonString);
     } else {
       return null;
+    }
+  }
+
+
+  Future getData() async {
+
+
+    final date = new Map();
+    date['date'] = "01-01-2022";
+
+    var apiUrl = Uri.parse("http://172.16.154.13/rdtl-hrm/api/get-all-user-specific-month-attendance-data-grouped");
+    var response = await http.post(apiUrl, headers: {
+      'Authorization': 'Bearer ${"95|Dnl96dmTGkeAI98vnIuZmxl6fH54YJFOmZwboBxB"}'},
+        body: {"date": "01-01-2022"});
+    if (response.statusCode == 200) {
+
+      var DataList = json.decode(response.body);
+
+      print(">>"+DataList['success'].toString());
+
+
+      return MonthlyGroup3.fromJson(DataList);
+
+    } else {
+      print('error');
     }
   }
 }
