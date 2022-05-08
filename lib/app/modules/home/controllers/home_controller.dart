@@ -100,7 +100,16 @@ class HomeController extends GetxController {
 
   Future<void> getMonthlyAttendance() async {
 
-    listData.value = await HomeProvider().getData();
+
+
+    try{
+      listData.value = await HomeProvider().getData();
+    }
+    finally{
+        final pdfFile = await PdfMonthlyDataApi.generate(listData.value);
+
+        PdfApi.openFile(pdfFile);
+    }
 
 
 

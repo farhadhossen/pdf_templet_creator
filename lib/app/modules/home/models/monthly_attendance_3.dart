@@ -35,6 +35,7 @@ class MonthlyGroup3 {
 class Datum {
   Datum({
     this.employeeId,
+    this.userFullName,
     this.id,
     this.inTime,
     this.isLate,
@@ -46,6 +47,7 @@ class Datum {
   });
 
   int? employeeId;
+  String? userFullName;
   int? id;
   String? inTime;
   dynamic? isLate;
@@ -57,6 +59,7 @@ class Datum {
 
   factory Datum.fromJson(Map<String, dynamic> json) => Datum(
     employeeId: json["employee_id"],
+    userFullName: json["user_full_name"],
     id: json["id"] == null ? null : json["id"],
     inTime: json["in_time"],
     isLate: json["is_late"],
@@ -69,6 +72,7 @@ class Datum {
 
   Map<String, dynamic> toJson() => {
     "employee_id": employeeId,
+    "user_full_name": userFullName,
     "id": id == null ? null : id,
     "in_time": inTime,
     "is_late": isLate,
