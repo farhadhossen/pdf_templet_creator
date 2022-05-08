@@ -26,14 +26,47 @@ class HomeView extends GetView<HomeController> {
 
             ),
 
-            Obx(()=>Text(""+controller.listData.value.data![0]![2]![0].employeeId.toString()))
+            // Obx(()=>Text(""+controller.listData.value.data![0]![2]![0].employeeId.toString())),
             //Text(""+controller.attendanceModel.value.data!.length.toString()),
 
-            // Expanded(
-            //   child: SingleChildScrollView(
-            //     child: Expanded(child: LeftSideDesktopView()),
-            //   ),
-            // )
+            //LeftSideDesktopView(),
+
+            Obx(()=>
+              controller.listData.value.success.isNull?Container(
+                  alignment: Alignment.center,
+                  margin: EdgeInsets.only(top: 20),
+                  child: const CircularProgressIndicator()
+              ):
+                  // Text(""+controller.listData.value.data!.length.toString())
+              Expanded(
+                flex: 1,
+                child: controller.listData.value.data![0]!.length <=0
+                    ?Text("empty"):
+
+                     SingleChildScrollView(
+
+                       child: Container(
+                         height: 900,
+                         color: Colors.redAccent,
+                           child: SingleChildScrollView(
+                             child: ListView.builder(
+                               shrinkWrap: true,
+                               itemCount: controller.listData.value.data![0]!.length,
+                                 itemBuilder:(context1, index1){{
+                                   return
+                                     Text("hi"+(controller.listData.value.data![0]![0]!).length.toString());
+                                   ///ei porjonto thik ache
+                                 }
+    }),
+                           ),
+                       ),
+                     )
+
+              )
+
+            )
+
+
           ],
         ),
       ),

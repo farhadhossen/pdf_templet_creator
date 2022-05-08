@@ -14,8 +14,11 @@ class HomeController extends GetxController {
   //TODO: Implement HomeController
 
   final count = 0.obs;
+  var listData = MonthlyGroup3().obs;
+
   @override
   void onInit() {
+
 
     getMonthlyAttendance();
 
@@ -93,10 +96,13 @@ class HomeController extends GetxController {
   var attendanceList = List<MonthlyGroup3>.empty(growable: true).obs;
 
   // var listData = List<List<EveryoneMonthlyData>>.empty(growable: true).obs;
-  var listData = MonthlyGroup3().obs;
+
+
   Future<void> getMonthlyAttendance() async {
 
     listData.value = await HomeProvider().getData();
+
+
 
     // List<List<EveryoneMonthlyData>> list = await HomeProvider().getData();
     // listData.addAll(list);
