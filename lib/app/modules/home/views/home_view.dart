@@ -54,8 +54,19 @@ class HomeView extends GetView<HomeController> {
                                itemCount: controller.listData.value.data![0]!.length,
                                  itemBuilder:(context1, index1){{
                                    return
-                                     Text("hi"+(controller.listData.value.data![0]![0]!).length.toString());
+                                     // Text("hi"+index1.toString());
+                                     // Text("hi"+(controller.listData.value.data![0]![0]!).toString());
                                    ///ei porjonto thik ache
+                                   ListView.builder(
+                                     shrinkWrap: true,
+                                       itemCount: controller.listData.value.data![0]![index1]!.length,
+                                       itemBuilder: (context2, index2){
+                                         return
+                                           // Text("Hi "+index1.toString()+" - "+index2.toString()
+                                           Text("Hi "+controller.listData.value.data![0]![index1]![index2]!.employeeId.toString()
+
+                                           );
+                                       });
                                  }
     }),
                            ),
