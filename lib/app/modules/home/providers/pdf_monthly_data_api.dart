@@ -37,9 +37,19 @@ class PdfMonthlyDataApi{
               return Padding(
                 padding: const EdgeInsets.all(2.0),
                 child: Container(
-                  color: listData.data![0]![index1]![index2]!.isPresent
+                  color:
+
+                  listData.data![0]![index1]![index2]!.isPresent
                       .toString() ==
-                      "1"?PdfColors.white:PdfColors.red,
+                      "1"?
+                  (listData.data![0]![index1]![index2]!.isLate == "N/A"?
+                  ((listData.data![0]![index1]![index2]!.day == "Friday"?
+                  PdfColors.lightBlueAccent100:
+                  PdfColors.white)):PdfColors.orangeAccent)
+                      :
+                  (listData.data![0]![index1]![index2]!.day == "Friday"?
+                  PdfColors.white:
+                  PdfColors.red),
                   child: Row(
                     children: [
 
@@ -49,10 +59,13 @@ class PdfMonthlyDataApi{
 
 
 
-                            ((index2-1) == -1? NameAndTitle(""+listData.data![0]![index1]![index2]!.userFullName.toString())
+                            ((index2-1) == -1? NameAndTitle(""+listData.data![0]![index1]![index2]!.userFullName.toString()
+                                +"\n"+
+                                "Employee Id : "+listData.data![0]![index1]![index2]!.employeeId.toString())
                                 :listData.data![0]![index1]![index2]!.userFullName
                                 != listData.data![0]![index1]![index2-1]!.userFullName ?
-                            NameAndTitle(""+listData.data![0]![index1]![index2]!.userFullName.toString())
+                            NameAndTitle(""+listData.data![0]![index1]![index2]!.userFullName.toString()+"\n"+
+                            "Employee Id : "+listData.data![0]![index1]![index2]!.employeeId.toString())
                                 : Container()),
 
                             Row(
